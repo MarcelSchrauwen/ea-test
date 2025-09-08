@@ -100,7 +100,7 @@ function bulkshow(showpage) {
                 let url = $(this).attr("href");
                 if (url) {
                     // Kies hier wat je wilt tonen (Notes, TaggedValues, etc.)
-                    $("#eaTooltip").load(url + " .content #ObjectDetailsNotes", function() {
+                    $("#eaTooltip").load(url + "ObjectDetailsNotes", function() {
                         $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 }).fadeIn(200);
                     });
                 }
