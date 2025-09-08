@@ -85,22 +85,36 @@ function bulkshow(showpage) {
    Maatwerk: Tooltip functionaliteit
    ------------------------------ */
 (function() {
-    // jQuery inladen
-    var jq = document.createElement("script");
-    jq.src = "https://code.jquery.com/jquery-3.6.0.min.js";
-    document.getElementsByTagName("head")[0].appendChild(jq);
+    // jQuery inladen (indien nog niet aanwezig)
+    if (typeof jQuery === "undefined") {
+        var jq = document.createElement("script");
+        jq.src = "https://code.jquery.com/jquery-3.6.0.min.js";
+        document.getElementsByTagName("head")[0].appendChild(jq);
 
-    jq.onload = function() {
+        jq.onload = initTooltip;
+    } else {
+        initTooltip();
+    }
+
+    function initTooltip() {
         $(document).ready(function() {
-            // Tooltip-div toevoegen
-            $("body").append('<div id="eaTooltip" style="position:absolute; display:none; background:#fff; border:1px solid #ccc; padding:8px; max-width:300px; z-index:1000; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2);"></div>');
+            // Tooltip-div toevoegen (scrollbaar en styled)
+            $("body").append('<div id="eaTooltip" style="position:absolute; display:none; background:#fff; border:1px solid #ccc; padding:8px; max-width:400px; max-height:300px; overflow:auto; z-index:1000; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); font-family:Arial,sans-serif; font-size:12px; line-height:1.4em;"></div>');
 
             // Hover event voor diagram-areas
             $("map area").hover(function(e) {
-                let url = $(this).attr("href");
-                if (url) {
-                    // Kies hier wat je wilt tonen (Notes, TaggedValues, etc.)
-                    $("#eaTooltip").load(url + "ObjectDetailsNotes", function() {
+                var href = $(this).attr("href"); // bijv. EA57.htmObjectDetailsNotes
+                var match = href.match(/(.+\.htm)(.+)/); // splits bestand en sectie
+
+                if(match) {
+                    var url = match[1];               // EA57.htm
+                    var selector = "#" + match[2];    // #ObjectDetailsNotes of #ObjectDetailsTagged
+
+                    // Laad alleen de gewenste sectie in tooltip
+                    $("#eaTooltip").load(url + " " + selector, function(response, status, xhr) {
+                        if(status === "error") {
+                            $("#eaTooltip").text("Fout bij laden van tooltip: " + xhr.status + " " + xhr.statusText);
+                        }
                         $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 }).fadeIn(200);
                     });
                 }
@@ -113,5 +127,5 @@ function bulkshow(showpage) {
                 $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 });
             });
         });
-    };
+    }
 })();
