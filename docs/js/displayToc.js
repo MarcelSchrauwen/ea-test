@@ -88,33 +88,20 @@ window.addEventListener("load", function() {
     // Controleer of jQuery beschikbaar is
     if (typeof jQuery === "undefined") return;
 
-    // Tooltip-div toevoegen
-    if($("#eaTooltip").length === 0) {
-        $("body").append('<div id="eaTooltip" style="position:absolute; display:none; background:#fff; border:1px solid #ccc; padding:8px; max-width:400px; max-height:300px; overflow:auto; z-index:1000; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); font-family:Arial,sans-serif; font-size:12px; line-height:1.4em;"></div>');
+    // Voeg tooltip-div toe als die nog niet bestaat
+    if($("#eaTooltip").length === 0){
+        $("body").append('<div id="eaTooltip" style="position:absolute; display:none; background:#fff; border:1px solid #ccc; padding:8px; max-width:200px; max-height:100px; overflow:auto; z-index:1000; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); font-family:Arial,sans-serif; font-size:12px; line-height:1.4em;">Tooltip test</div>');
     }
 
-    // Hover event
-    $("map area").each(function() {
-        $(this).hover(function(e) {
-            var href = $(this).attr("href"); // bijv. EA1/EA2/EA57.htmObjectDetailsNotes
-            var lastHtm = href.lastIndexOf(".htm");
-            if(lastHtm === -1) return;
+    // Hover event voor diagram areas
+    $("map area").hover(function(e) {
+        $("#eaTooltip").css({ top: e.pageY + 15, left: e.pageX + 15 }).fadeIn(200);
+    }, function() {
+        $("#eaTooltip").hide();
+    });
 
-            var url = href.substring(0, lastHtm + 4); // EA1/EA2/EA57.htm
-            var selector = "#" + href.substring(lastHtm + 4); // #ObjectDetailsNotes
-
-            $("#eaTooltip").load(url + " " + selector, function(response, status, xhr){
-                if(status === "error") {
-                    $("#eaTooltip").text("Fout bij laden: " + xhr.status + " " + xhr.statusText);
-                }
-                $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 }).fadeIn(200);
-            });
-        }, function() {
-            $("#eaTooltip").hide().empty();
-        });
-
-        $(this).mousemove(function(e){
-            $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 });
-        });
+    // Tooltip volgt de muis
+    $("map area").mousemove(function(e){
+        $("#eaTooltip").css({ top: e.pageY + 15, left: e.pageX + 15 });
     });
 });
