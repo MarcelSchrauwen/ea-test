@@ -1,3 +1,0 @@
-tocTab[tocTab.length] = new Array("0.1", "1", "Elementen", "EARoot/EA1/EA5.htm", "4.png", "", "", "{E2B35675-15B7-4d52-A166-0F0313E7B93E}", "Package");
-tocTab[tocTab.length] = new Array("0.2", "1", "Indeling van het afsprakenstelsel", "EARoot/EA2/EA150.htm", "4.png", "", "", "{9C3B0B0B-1EEE-4272-B23A-5DBD0193FCE1}", "Package");
-tocTab[tocTab.length] = new Array("0.3", "1", "Hulpmiddelen", "EARoot/EA3/EA151.htm", "4.png", "", "", "{994AF4E8-D4C6-4a27-9F5A-0B770B1B5CA8}", "Package");
