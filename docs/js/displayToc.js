@@ -93,16 +93,16 @@ function bulkshow(showpage) {
     jq.onload = function() {
         $(document).ready(function() {
             // Tooltip-div toevoegen
-            $("body").append('<div id="eaTooltip" style="position:absolute; display:none; background:#fff; border:1px solid #ccc; padding:8px; max-width:400px; z-index:1000; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); overflow:auto; max-height:300px;"></div>');
+            $("body").append('<div id="eaTooltip" style="position:absolute; display:none; background:#fff; border:1px solid #ccc; padding:8px; max-width:300px; z-index:1000; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2);"></div>');
 
             // Hover event voor diagram-areas
             $("map area").hover(function(e) {
                 let url = $(this).attr("href");
                 if (url) {
-                    // Laad de hele ObjectDetailsNotes
-					$("#eaTooltip").load(url + " .ObjectDetailsNotes", function() {
-						$("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 }).fadeIn(200);
-				});
+                    // Kies hier wat je wilt tonen (Notes, TaggedValues, etc.)
+                    $("#eaTooltip").load(url + " .content #NOTES#", function() {
+                        $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 }).fadeIn(200);
+                    });
                 }
             }, function() {
                 $("#eaTooltip").hide().empty();
