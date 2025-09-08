@@ -99,10 +99,10 @@ function bulkshow(showpage) {
             $("map area").hover(function(e) {
                 let url = $(this).attr("href");
                 if (url) {
-                    // ⚡ Laad de hele detailpagina
-                    $("#eaTooltip").load(url, function() {
-                        $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 }).fadeIn(200);
-                    });
+                    // Laad de hele ObjectDetailsNotes
+					$("#eaTooltip").load(url + " .ObjectDetailsNotes", function() {
+						$("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 }).fadeIn(200);
+				});
                 }
             }, function() {
                 $("#eaTooltip").hide().empty();
