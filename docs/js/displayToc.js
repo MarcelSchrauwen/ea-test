@@ -84,48 +84,37 @@ function bulkshow(showpage) {
 /* ------------------------------
    Maatwerk: Tooltip functionaliteit
    ------------------------------ */
-(function() {
-    // jQuery inladen (indien nog niet aanwezig)
-    if (typeof jQuery === "undefined") {
-        var jq = document.createElement("script");
-        jq.src = "https://code.jquery.com/jquery-3.6.0.min.js";
-        document.getElementsByTagName("head")[0].appendChild(jq);
+window.addEventListener("load", function() {
+    // Controleer of jQuery beschikbaar is
+    if (typeof jQuery === "undefined") return;
 
-        jq.onload = initTooltip;
-    } else {
-        initTooltip();
+    // Tooltip-div toevoegen
+    if($("#eaTooltip").length === 0) {
+        $("body").append('<div id="eaTooltip" style="position:absolute; display:none; background:#fff; border:1px solid #ccc; padding:8px; max-width:400px; max-height:300px; overflow:auto; z-index:1000; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); font-family:Arial,sans-serif; font-size:12px; line-height:1.4em;"></div>');
     }
 
-    function initTooltip() {
-        $(document).ready(function() {
-            // Tooltip-div toevoegen (scrollbaar en styled)
-            $("body").append('<div id="eaTooltip" style="position:absolute; display:none; background:#fff; border:1px solid #ccc; padding:8px; max-width:400px; max-height:300px; overflow:auto; z-index:1000; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); font-family:Arial,sans-serif; font-size:12px; line-height:1.4em;"></div>');
+    // Hover event
+    $("map area").each(function() {
+        $(this).hover(function(e) {
+            var href = $(this).attr("href"); // bijv. EA1/EA2/EA57.htmObjectDetailsNotes
+            var lastHtm = href.lastIndexOf(".htm");
+            if(lastHtm === -1) return;
 
-            // Hover event voor diagram-areas
-            $("map area").hover(function(e) {
-                var href = $(this).attr("href"); // bijv. EA57.htmObjectDetailsNotes
-                var match = href.match(/(.+\.htm)(.+)/); // splits bestand en sectie
+            var url = href.substring(0, lastHtm + 4); // EA1/EA2/EA57.htm
+            var selector = "#" + href.substring(lastHtm + 4); // #ObjectDetailsNotes
 
-                if(match) {
-                    var url = match[1];               // EA57.htm
-                    var selector = "#" + match[2];    // #ObjectDetailsNotes of #ObjectDetailsTagged
-
-                    // Laad alleen de gewenste sectie in tooltip
-                    $("#eaTooltip").load(url + " " + selector, function(response, status, xhr) {
-                        if(status === "error") {
-                            $("#eaTooltip").text("Fout bij laden van tooltip: " + xhr.status + " " + xhr.statusText);
-                        }
-                        $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 }).fadeIn(200);
-                    });
+            $("#eaTooltip").load(url + " " + selector, function(response, status, xhr){
+                if(status === "error") {
+                    $("#eaTooltip").text("Fout bij laden: " + xhr.status + " " + xhr.statusText);
                 }
-            }, function() {
-                $("#eaTooltip").hide().empty();
+                $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 }).fadeIn(200);
             });
-
-            // Tooltip laten meebewegen met muis
-            $("map area").mousemove(function(e) {
-                $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 });
-            });
+        }, function() {
+            $("#eaTooltip").hide().empty();
         });
-    }
-})();
+
+        $(this).mousemove(function(e){
+            $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 });
+        });
+    });
+});
