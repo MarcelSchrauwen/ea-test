@@ -10,8 +10,8 @@ function toggleItem(item) {
             if (titles[i].id == item + "Title") {
                 titles[i].style.background = "#FFFFFF";
                 titles[i].style.color = "#000000";
-            }
-            else {
+            } else {
+
                 titles[i].style.background = "#DDDDDD";
                 titles[i].style.color = "#666666";
             }
@@ -21,11 +21,13 @@ function toggleItem(item) {
         if (tabs.length > 0) {
             height = toggleItemDetails(tabs, item);
         }
+
+        /* table.style.height = height + aparent.clientHeight + table.clientHeight + "px";*/
     }
 }
-
 function toggleItemDetails(tabs, title) {
-    var i, height = 0;
+    var i,
+    height = 0;
 
     for (i = 0; i < tabs.length; i++) {
         var tab = tabs[i];
@@ -33,8 +35,7 @@ function toggleItemDetails(tabs, title) {
         if (tab.id == title + "Table") {
             tab.style.display = "block";
             height = tab.clientHeight;
-        }
-        else
+        } else
             tab.style.display = "none";
     }
 
@@ -65,8 +66,7 @@ function bulkshow(showpage) {
 
                     divs[j].innerHTML = tmpStr;
                 }
-            }
-            else {
+            } else {
                 document.getElementById(id).style.display = 'none';
             }
         }
@@ -80,33 +80,53 @@ function bulkshow(showpage) {
         }
     }
 }
+// START - TOOLTIP CODE
+function mapRectangleMouseOver(sender) {
 
-/* ------------------------------
-   Maatwerk: Tooltip functionaliteit
-   ------------------------------ */
-$(document).ready(function() {
-    // Voeg tooltip-div toe als die nog niet bestaat
-    if($("#eaTooltip").length === 0){
-        $("body").append('<div id="eaTooltip" style="position:absolute; display:none; background:#fff; border:1px solid #ccc; padding:8px; max-width:400px; max-height:300px; overflow:auto; z-index:1000; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); font-family:Arial,sans-serif; font-size:12px; line-height:1.4em;"></div>');
-    }
+    $(".previewPanel").css("display", "none");
 
-    // Delegated binding voor hover
-    $(document).on("mouseenter", "map area", function(e){
-        var href = $(this).attr("href"); // bijv. EA57.htmObjectDetailsNotes
-        var lastHtm = href.lastIndexOf(".htm");
-        if(lastHtm === -1) return;
+    if (!sender || !sender.href) return;
 
-        var url = href.substring(0, lastHtm + 4);        // EA57.htm
-        // Laad de volledige pagina (voor nu)
-        $("#eaTooltip").load(url, function(response, status, xhr){
-            if(status === "error"){
-                $("#eaTooltip").text("Fout bij laden: " + xhr.status + " " + xhr.statusText);
-            }
-            $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 }).fadeIn(200);
-        });
-    }).on("mouseleave", "map area", function(){
-        $("#eaTooltip").hide().empty();
-    }).on("mousemove", "map area", function(e){
-        $("#eaTooltip").css({ top: e.pageY+15, left: e.pageX+15 });
+    var informationURL = sender.href;
+    if (!informationURL) return;
+
+    jQuery.get(informationURL, function (data) {
+
+        var loadedHTML = jQuery.parseHTML(data);
+        var docDOM = $('<output>').append(loadedHTML);
+        var bodyDOM = $('.ElementPage', docDOM);
+
+        if (!bodyDOM.length) return;
+
+        var itemNotes = $('.ObjectDetailsNotes', bodyDOM);
+        var taggedValues = $('#TaggedValTable', bodyDOM);
+
+        if (!itemNotes.length && !taggedValues.length) return;
+
+        var notes = unescapeHtml(itemNotes.html() || "");
+        if (notes === "" && !taggedValues.html()) return;
+
+        var array = sender.coords.split(',');
+
+        $(".previewPanel").html("");
+        $(".previewPanel").append(notes);
+        $(".previewPanel").append(taggedValues.html());
+
+        $(".previewPanel").css("display", "block");
+        $(".previewPanel").css("margin-top", Number(array[1]) + "px");
+        $(".previewPanel").css("margin-left", (Number(array[2]) - 5) + "px");
+
     });
-});
+
+}
+
+function mapRectangleMouseOut(sender) {
+    if ($(".previewPanel:hover").length === 0) {
+        $(".previewPanel").css("display", "none");
+    }
+}
+
+function unescapeHtml(safe) {
+    return $('<div>').html(safe).text();
+}
+// EINDE - TOOLTIP CODE

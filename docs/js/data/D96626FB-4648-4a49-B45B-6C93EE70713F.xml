@@ -1,0 +1,2 @@
+tocTab[tocTab.length] = new Array("0.2:1", "", "«ArchiMate_BusinessActor» BusinessActor", "EARoot/EA2/EA8.htm", "9F0DDA8A-5_ArchiMate_BusinessActor.png", "E2", "0", "", "Class0","{3C8F47A5-5A56-4ccb-B0AA-39362B71A960}");
+tocTab[tocTab.length] = new Array("0.2:2", "", "«ArchiMate_BusinessRole» BusinessRole", "EARoot/EA2/EA9.htm", "9F0DDA8A-5_ArchiMate_BusinessRole.png", "E3", "0", "", "Class0","{E4E1FE5F-2E9A-4715-A60B-E25A2F97F6BF}");
