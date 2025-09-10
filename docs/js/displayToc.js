@@ -85,62 +85,58 @@ let tooltipTimeout;
 
 function mapRectangleMouseOver(sender) {
     clearTimeout(tooltipTimeout);
-    $(".previewPanel").stop(true, true).hide();
+    const tooltip = $(".previewPanel");
+    tooltip.stop(true, true).hide();
 
     if (!sender || !sender.href) return;
-
-    var informationURL = sender.href;
+    const informationURL = sender.href;
     if (!informationURL) return;
 
     jQuery.get(informationURL, function (data) {
-        var loadedHTML = jQuery.parseHTML(data);
-        var docDOM = $('<output>').append(loadedHTML);
-        var bodyDOM = $('.ElementPage', docDOM);
-
+        const loadedHTML = jQuery.parseHTML(data);
+        const docDOM = $('<output>').append(loadedHTML);
+        const bodyDOM = $('.ElementPage', docDOM);
         if (!bodyDOM.length) return;
 
-        var itemNotes = $('.ObjectDetailsNotes', bodyDOM);
-        var taggedValues = $('#TaggedValTable', bodyDOM);
-
+        const itemNotes = $('.ObjectDetailsNotes', bodyDOM);
+        const taggedValues = $('#TaggedValTable', bodyDOM);
         if (!itemNotes.length && !taggedValues.length) return;
 
-        var notes = unescapeHtml(itemNotes.html() || "");
+        const notes = unescapeHtml(itemNotes.html() || "");
         if (notes === "" && !taggedValues.html()) return;
 
-        // Tooltip content vullen
-        $(".previewPanel").html("");
-        $(".previewPanel").append(notes);
-        $(".previewPanel").append(taggedValues.html());
+        // Vul tooltip met content en maak tijdelijk zichtbaar voor meting
+        tooltip.html(notes + taggedValues.html())
+               .css({ display: "block", top: 0, left: 0, opacity: 0 });
 
-        // Bepalen positie van het aangeklikte element
-        var rect = sender.getBoundingClientRect();
-        var tooltip = $(".previewPanel");
-
-        var offset = 8; // ruimte tussen element en tooltip
-        var tooltipWidth = tooltip.outerWidth();
-        var tooltipHeight = tooltip.outerHeight();
-        var viewportWidth = $(window).width();
-        var viewportHeight = $(window).height();
-
-        var top = rect.bottom + offset;
-        var left = rect.left;
-
-        // Slimme herpositionering
-        if (top + tooltipHeight > viewportHeight) {
-            top = rect.top - tooltipHeight - offset;
-        }
-        if (left + tooltipWidth > viewportWidth) {
-            left = viewportWidth - tooltipWidth - offset;
-        }
-        if (left < 0) left = offset;
-
-        // Delay + fade-in
+        // Met delay positioneren en fade-in
         tooltipTimeout = setTimeout(function () {
+            const rect = sender.getBoundingClientRect();
+            const offset = 8; // ruimte tussen element en tooltip
+            const tooltipWidth = tooltip.outerWidth();
+            const tooltipHeight = tooltip.outerHeight();
+            const viewportWidth = $(window).width();
+            const viewportHeight = $(window).height();
+
+            let top = rect.bottom + offset;
+            let left = rect.left;
+
+            // Slimme herpositionering
+            if (top + tooltipHeight > viewportHeight) {
+                top = rect.top - tooltipHeight - offset;
+            }
+            if (left + tooltipWidth > viewportWidth) {
+                left = viewportWidth - tooltipWidth - offset;
+            }
+            if (left < 0) left = offset;
+
             tooltip.css({
                 position: "absolute",
                 top: top + window.scrollY + "px",
-                left: left + window.scrollX + "px"
-            }).fadeIn(200);
+                left: left + window.scrollX + "px",
+                opacity: 1
+            }).hide().fadeIn(200);
+
         }, 250); // 250ms delay
     });
 }
@@ -154,3 +150,4 @@ function unescapeHtml(safe) {
     return $('<div>').html(safe).text();
 }
 // EINDE - TOOLTIP CODE
+
