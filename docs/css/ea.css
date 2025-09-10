@@ -726,33 +726,37 @@ div{
 
 /* START: TOOLTIP CODE */
 .previewPanel {
-       display: none;
-       position: fixed;        /* fixed zodat het altijd op dezelfde plek blijft */
-       bottom: 10px;           /* 10px vanaf de onderkant van het scherm */
-       left: 10px;             /* 10px vanaf de linkerkant van het scherm */
-       width: 400px;
-       max-height: 400px;
-       border: 3px solid black;
-       border-radius: 5px;
-       padding: 5px;
-       background-color: rgb(255, 242, 168);
-       z-index: 1000;          /* zorg dat het boven andere elementen blijft */
+    display: none;
+    position: absolute;
+    /* Verplaats tooltip boven en iets naar links */
+    bottom: 100%; /* boven het element */
+    left: 0;      /* standaard links uitlijnen */
+    transform: translateX(-20px); /* extra kleine verschuiving naar links */
+    
+    width: 400px;
+    max-height: 400px;
+    
+    border: 1px solid black; /* dunner dan 3px */
+    border-radius: 5px;
+    padding: 5px;
+    
+    background-color: #ffffff; /* wit in plaats van geel */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* optioneel, voor beter contrast */
 }
 
 div.previewPanel .TableRow {
-       padding-bottom: 2px !important;
-       background-color: inherit !important;
+    padding-bottom: 2px !important;
+    background-color: inherit !important;
 }
 
 div.previewPanel .TableHeading {
-       background-color: inherit !important;
-       padding-top: 3px;
+    background-color: inherit !important;
+    padding-top: 3px;
 }
 
 div.previewPanel .TableRowBottomDashed {
-       display: none;
+    display: none;
 }
 /* EIND: TOOLTIP CODE */
 
 #EMBEDDED_IMAGES#
-
