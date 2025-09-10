@@ -1,26 +1,29 @@
 A:link, A:hover {
-	color: #CC6633;
-	text-decoration: underline
+	/* color: #CC6633; */
+	color:blue;
+	/* text-decoration: underline */
+	text-decoration: none;
 }
 A:active, A:visited {
-	color: #CC6633;
+	/* color: #CC6633; */
+	color:blue;
 }
 B.black {
 	color: black;
-	font-size: 10px;
+	/* font-size: 10px; */
 	font-weight: bold;
 	text-decoration: none;
 }
 B.red {
 	color: red;
-	font-size: 10px;
+	/* font-size: 10px; */
 	font-weight: bold;
 	text-decoration: none;
 }
 BODY {
 	background-color: #EEEEEE;
 	font-family: "Arial", sans-serif;
-	font-size: 14px;
+	/* font-size: 14px; */
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
@@ -59,18 +62,31 @@ DIV.menu {
 FORM {
 	margin-bottom: 0px;
 }
+
+HR {
+    border: none;
+    border-top: 1px solid #ccc;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
 H1 {	
-	font-size: 200%;
+	/* font-size: 200%; */
+	font-size: 26px;
 	font-weight: normal;
 	margin: 0em 0em 0em -20px;
-	padding-left: 60px;
-	padding-top: 16px;
+	/* padding-left: 60px; */
+	padding-left: 30px;
+	/* padding-top: 16px; */
+	padding-top: 14px;
 	float:left;
 	color: #4a4a4a;
 }
 H2 {
 	color: #000000;
-	font-size: 80%;
+	/* font-size: 80%; */
+	font-size: 16px;
 	font-weight: bold;
 	margin-bottom: 3px;
 	margin-left: 10px;
@@ -79,7 +95,8 @@ H2 {
 }
 H3 {
 	color: #000000;
-	font-size: 80%;
+	/* font-size: 80%; */
+	font-size: 14px;
 	font-weight: bold;
 	margin-bottom: -5px;
 	margin-left: 10px;
@@ -87,7 +104,8 @@ H3 {
 }
 H4 {
 	color: #000000;
-	font-size: 70%;
+	/* font-size: 70%; */
+	font-size: 12px;
 	font-weight: bold;
 	margin-bottom: 0px;
 	margin-top: 15px;
@@ -102,13 +120,17 @@ OL {
 	margin-top: 0pt;
 }
 P {
-	font-family: "Verdana", sans-serif;
-	font-size: 70%;
-	line-height: 12pt;
+	/* font-family: "Verdana", sans-serif; */
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+	/* font-size: 70%; */
+	font-size: 14px;
+	/* line-height: 12pt; */
+	line-height: 21px;
 	margin: 10px 10px 0px 10px;
 }
+
 P {
-	font-size: 8pt;
+	/* font-size: 8pt; */
 }
 PRE {
 	background-color: #FDEDBB;
@@ -119,7 +141,8 @@ PRE {
 }
 TD {
 	color: #000000;
-	font-size: 8pt
+	/* font-size: 8pt */
+	font-size: 14px;
 }
 UL {
 	color: #000000;
@@ -312,7 +335,8 @@ UL {
 	display: none;
 	margin-top: 17px;
 	border: 1px solid #999999;
-	height: 693px;
+	/* height: 693px; */
+	height: auto;
 	overflow: scroll;
 }
 .ItemData {
@@ -335,9 +359,11 @@ UL {
 	border-top: 1px solid #999999;
 	cursor: pointer;
 	float: left;
-	font-size: 11px;
+	/* font-size: 11px; */
+	font-size: 14px;
 	list-style: none;
-	margin: 0px 2px;
+	/* margin: 0px 2px; */
+	margin: -3px 2px;
 	padding: 1px 10px;
 	position: relative;
 	white-space: nowrap;
@@ -364,14 +390,15 @@ UL {
 	margin: 10px 15px 4px 15px;	
 }
 .ObjectDetailsNotes {
-	background-color: #FAFAFA;
-	border: 1px solid #EEEEEE;
+	/* background-color: #FAFAFA; */
+	/* border: 1px solid #EEEEEE; */
 	color: #1A1A1A;
 	height: expression(this.scrollHeight > 200 ? "200px" : "auto");
-	max-height: 200px;
+	/* max-height: 200px; */
 	overflow: auto;
 	margin: 5px;
-	margin-top:20px;
+	/* margin-top:20px; */
+	margin-top:10px;
 	padding: 5px;
 }
 .ObjectDetailsTopic {
@@ -421,9 +448,10 @@ UL {
 	font-style: italic;
 }
 .ObjectTitle {
-	font-size: 14px;
+	/* font-size: 14px; */
+	font-size: 16x;
 	font-weight: bold;
-	margin-top: 25px;
+	/* margin-top: 25px; */
 	color: #4a4a4a;
 }
 .PageBody {
@@ -483,7 +511,8 @@ UL {
 	background-color: #FFFFFF;
 	color: #222222;
 	cursor: default;
-	font-size: 11px;
+	/* font-size: 11px; */
+	font-size: 14px;
 	padding: 2px 2px 20px 2px;
 	vertical-align: top;
 	max-width:865px;
@@ -569,7 +598,8 @@ UL {
 .header_frame {
     height: 60px;
     background-color: white;
-	border-radius:10px;
+	/* border-radius:10px; */
+	border-radius: 0px;
 	margin-top: 10px;
 	box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);
 }
@@ -586,15 +616,20 @@ UL {
 	height: 85%;
 	box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);
 	background-color:  white;
-	border-radius: 10px;
+	/* border-radius: 10px; */
+	border-radius: 0px;
 	vertical-align: top;
 }
 .breadcrumb_frame{
 	background-color: white;
-	border-radius: 10px;
-	margin-top:10px;
-	margin-bottom: 5px;
-	padding-bottom: 10px;
+	/* border-radius: 10px; */
+	border-radius: 0px;
+	/* margin-top:10px; */
+	margin-top: 3px;
+	/* margin-bottom: 5px;*/
+	margin-bottom: 2px;
+	/* padding-bottom: 10px; */
+	padding-bottom: 8px;
 	box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);
 }
 
@@ -611,10 +646,12 @@ UL {
 .indexcell{
 	background-color: white;
 	box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);
-	border-radius: 10px;
+	/* border-radius: 10px; */
+	border-radius: 0px;
 	margin-top: 5px;
 	height: 100%;
-	width: 350px;
+	/* width: 350px; */
+	width: 450px;
 	padding-left: 15px;
 	padding-top: 15px;
 	vertical-align: top;
@@ -644,14 +681,16 @@ html{
   height: 100%;
 }
 body{
-  max-width: 1400px;
+  /* max-width: 1400px; */
+  max-width: 99%;
   margin-left: auto;
   margin-right: auto;
   height: 100%;
 
 }
 .diagram_image {
-    max-width: 990px;
+    /* max-width: 990px; */
+	min-width: 65%;
 	overflow: auto;
 	height: auto;
 	max-height: 800px;
@@ -717,4 +756,3 @@ div.previewPanel .TableRowBottomDashed {
 /* EIND: TOOLTIP CODE */
 
 #EMBEDDED_IMAGES#
-
