@@ -80,154 +80,49 @@ function bulkshow(showpage) {
         }
     }
 }
-/
-}
-
-function mapRectangleMouseOut(sender) {
-    if ($(".previewPanel:hover").length === 0) {
-        $(".previewPanel").css("display", "none");
-    }
-}
-
-function unescapeHtml(safe) {
-    return $('<div>').html(safe).text();
-}
 // START - TOOLTIP CODE
 function mapRectangleMouseOver(sender) {
-    $(".previewPanel").hide();
+
+    $(".previewPanel").css("display", "none");
 
     if (!sender || !sender.href) return;
+
     var informationURL = sender.href;
     if (!informationURL) return;
 
     jQuery.get(informationURL, function (data) {
+
         var loadedHTML = jQuery.parseHTML(data);
         var docDOM = $('<output>').append(loadedHTML);
         var bodyDOM = $('.ElementPage', docDOM);
+
         if (!bodyDOM.length) return;
 
         var itemNotes = $('.ObjectDetailsNotes', bodyDOM);
         var taggedValues = $('#TaggedValTable', bodyDOM);
+
         if (!itemNotes.length && !taggedValues.length) return;
 
         var notes = unescapeHtml(itemNotes.html() || "");
         if (notes === "" && !taggedValues.html()) return;
 
-        var array = sender.coords.split(',').map(function (v) { return Number(v); });
+        var array = sender.coords.split(',');
 
-        var $tooltip = $(".previewPanel");
-        $tooltip.html("").append(notes).append(taggedValues.html());
+        $(".previewPanel").html("");
+        $(".previewPanel").append(notes);
+        $(".previewPanel").append(taggedValues.html());
 
-        // Maak tooltip meetbaar zonder te flashen
-        $tooltip.css({
-            display: "block",
-            visibility: "hidden",
-            top: 0,
-            left: 0,
-            margin: 0
-        });
+        $(".previewPanel").css("display", "block");
+        $(".previewPanel").css("margin-top", Number(array[1]) + "px");
+        $(".previewPanel").css("margin-left", (Number(array[2]) - 5) + "px");
 
-        // Zoek de img die bij de map hoort (als die bestaat) en bepaal offset
-        var mapName = (sender.parentElement && sender.parentElement.name) ? sender.parentElement.name : null;
-        var $img = mapName ? $('img[usemap="#' + mapName + '"]').first() : $();
-        var imgOffset = $img.length ? $img.offset() : { left: 0, top: 0 };
-
-        // Coördinaten van het gebied in document-ruimte
-        var x1 = imgOffset.left + (array[0] || 0); // linkerkant van gebied
-        var y1 = imgOffset.top + (array[1] || 0);  // bovenkant van gebied
-        var x2 = imgOffset.left + (array[2] || 0); // rechterkant van gebied
-
-        var tooltipW = $tooltip.outerWidth();
-        var tooltipH = $tooltip.outerHeight();
-        var gap = 8; // kleine ruimte tussen gebied en tooltip
-
-        // viewport bounds in document-coördinaten
-        var viewportLeft = $(window).scrollLeft();
-        var viewportTop = $(window).scrollTop();
-        var viewportRight = viewportLeft + $(window).width();
-        var viewportBottom = viewportTop + $(window).height();
-
-        var left, top;
-
-        // Prefer rechts van het gebied (rechtsboven)
-        if (x2 + gap + tooltipW <= viewportRight) {
-            left = x2 + gap;
-        } else if (x1 - gap - tooltipW >= viewportLeft) {
-            // anders links van het gebied (linksboven)
-            left = x1 - gap - tooltipW;
-        } else {
-            // fallback: clamp binnen viewport
-            left = Math.min(Math.max(viewportLeft + gap, x2 + gap), viewportRight - tooltipW - gap);
-        }
-
-        // vertical: top uitlijnen met de bovenkant van het gebied, maar binnen viewport houden
-        top = y1;
-        if (top + tooltipH > viewportBottom - gap) {
-            top = viewportBottom - tooltipH - gap;
-        }
-        if (top < viewportTop + gap) {
-            top = viewportTop + gap;
-        }
-
-        // Plaats en maak zichtbaar
-        $tooltip.css({
-            left: Math.round(left) + "px",
-            top: Math.round(top) + "px",
-            visibility: "visible"
-        });
-
-        // Herpositioneer tijdens scroll/resize zolang tooltip zichtbaar is
-        var handler = function () { repositionTooltip(sender, $tooltip); };
-        $(window).on('resize.tooltip scroll.tooltip', handler);
-        // bewaar handler zodat we (optioneel) later specifiek kunnen verwijderen
-        $tooltip.data('tooltip-handler', handler);
     });
-}
 
-function repositionTooltip(sender, $tooltip) {
-    if (!$tooltip || $tooltip.length === 0 || $tooltip.css('display') === 'none') return;
-
-    var array = sender.coords.split(',').map(function (v) { return Number(v); });
-
-    var mapName = (sender.parentElement && sender.parentElement.name) ? sender.parentElement.name : null;
-    var $img = mapName ? $('img[usemap="#' + mapName + '"]').first() : $();
-    var imgOffset = $img.length ? $img.offset() : { left: 0, top: 0 };
-
-    var x1 = imgOffset.left + (array[0] || 0);
-    var y1 = imgOffset.top + (array[1] || 0);
-    var x2 = imgOffset.left + (array[2] || 0);
-
-    var tooltipW = $tooltip.outerWidth();
-    var tooltipH = $tooltip.outerHeight();
-    var gap = 8;
-
-    var viewportLeft = $(window).scrollLeft();
-    var viewportTop = $(window).scrollTop();
-    var viewportRight = viewportLeft + $(window).width();
-    var viewportBottom = viewportTop + $(window).height();
-
-    var left;
-    if (x2 + gap + tooltipW <= viewportRight) {
-        left = x2 + gap;
-    } else if (x1 - gap - tooltipW >= viewportLeft) {
-        left = x1 - gap - tooltipW;
-    } else {
-        left = Math.min(Math.max(viewportLeft + gap, x2 + gap), viewportRight - tooltipW - gap);
-    }
-
-    var top = y1;
-    if (top + tooltipH > viewportBottom - gap) top = viewportBottom - tooltipH - gap;
-    if (top < viewportTop + gap) top = viewportTop + gap;
-
-    $tooltip.css({ left: Math.round(left) + "px", top: Math.round(top) + "px" });
 }
 
 function mapRectangleMouseOut(sender) {
     if ($(".previewPanel:hover").length === 0) {
         $(".previewPanel").css("display", "none");
-        // verwijder eventueel toegevoegde handlers
-        $(window).off('resize.tooltip scroll.tooltip');
-        $(".previewPanel").removeData('tooltip-handler');
     }
 }
 

@@ -733,9 +733,9 @@ div{
        width:400px;
        max-height:400px;
        border: 3px solid black;
-       border-radius: 1px;
+       border-radius: 5px;
        padding: 5px 5px 5px 5px;
-       background-color: white;
+       background-color: rgb(255, 242, 168);
 }
 
 div.previewPanel .TableRow
