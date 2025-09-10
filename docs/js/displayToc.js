@@ -99,22 +99,38 @@ function mapRectangleMouseOver(sender) {
         if (!bodyDOM.length) return;
 
         var itemNotes = $('.ObjectDetailsNotes', bodyDOM);
-        // var taggedValues = $('#TaggedValTable', bodyDOM); // niet meer nodig
 
-        if (!itemNotes.length /* && !taggedValues.length */) return;
+        if (!itemNotes.length) return;
 
         var notes = unescapeHtml(itemNotes.html() || "");
-        if (notes === "" /* && !taggedValues.html() */) return;
+        if (notes === "") return;
 
         var array = sender.coords.split(',');
 
         $(".previewPanel").html("");
         $(".previewPanel").append(notes);
-        // $(".previewPanel").append(taggedValues.html()); // niet meer nodig
 
-        $(".previewPanel").css("display", "block");
-        $(".previewPanel").css("margin-top", (Number(array[1]) - 200) + "px");
-        $(".previewPanel").css("margin-left", (Number(array[2]) - 400) + "px");
+        var tooltip = $(".previewPanel");
+        tooltip.css("display", "block");
+
+        var top = Number(array[1]) - 5;
+        var left = Number(array[2]) - 5;
+
+        // Correctie voor rechts/bovenkant
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+        var tooltipWidth = tooltip.outerWidth();
+        var tooltipHeight = tooltip.outerHeight();
+
+        if (left + tooltipWidth > windowWidth) {
+            left = windowWidth - tooltipWidth - 10;
+        }
+        if (top + tooltipHeight > windowHeight) {
+            top = windowHeight - tooltipHeight - 10;
+        }
+
+        tooltip.css("margin-top", top + "px");
+        tooltip.css("margin-left", left + "px");
 
     });
 
