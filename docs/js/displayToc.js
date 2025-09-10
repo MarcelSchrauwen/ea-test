@@ -107,9 +107,15 @@ function mapRectangleMouseOver(sender) {
 
         // Vul tooltip met content en maak tijdelijk zichtbaar voor meting
         tooltip.html(notes + taggedValues.html())
-               .css({ display: "block", top: 0, left: 0, opacity: 0 });
+               .css({
+                   display: "block",
+                   top: 0,
+                   left: 0,
+                   opacity: 0,
+                   visibility: "hidden"
+               });
 
-        // Met delay positioneren en fade-in
+        // Delay + fade-in
         tooltipTimeout = setTimeout(function () {
             const rect = sender.getBoundingClientRect();
             const offset = 8; // ruimte tussen element en tooltip
@@ -134,7 +140,7 @@ function mapRectangleMouseOver(sender) {
                 position: "absolute",
                 top: top + window.scrollY + "px",
                 left: left + window.scrollX + "px",
-                opacity: 1
+                visibility: "visible"
             }).hide().fadeIn(200);
 
         }, 250); // 250ms delay
