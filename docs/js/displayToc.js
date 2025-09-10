@@ -113,10 +113,25 @@ function mapRectangleMouseOver(sender) {
         $(".previewPanel").append(taggedValues.html());
 
         $(".previewPanel").css("display", "block");
-        $(".previewPanel").css("margin-top", Number(array[1]) + "px");
 
-        // Tooltip links van het area-element (x1 - tooltip breedte - marge)
-        $(".previewPanel").css("margin-left", (Number(array[0]) - 405) + "px");
+        // tooltip-afmetingen ophalen
+        var tooltipWidth = $(".previewPanel").outerWidth();
+        var tooltipHeight = $(".previewPanel").outerHeight();
+
+        // midden van de rechthoek
+        var rectCenterX = (Number(array[0]) + Number(array[2])) / 2;
+
+        // bovenkant van de rechthoek
+        var rectTopY = Number(array[1]);
+
+        // tooltip links boven de rechthoek centreren
+        var left = rectCenterX - (tooltipWidth / 2);
+        var top = rectTopY - tooltipHeight - 10; // 10px marge
+
+        $(".previewPanel").css({
+            "margin-left": left + "px",
+            "margin-top": top + "px"
+        });
 
     });
 
