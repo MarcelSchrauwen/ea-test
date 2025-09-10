@@ -681,8 +681,8 @@ html{
   height: 100%;
 }
 body{
-  /* max-width: 1400px; */
-  max-width: 99%;
+  max-width: 1400px;
+  /* max-width: 99%;  */
   margin-left: auto;
   margin-right: auto;
   height: 100%;
