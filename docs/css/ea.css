@@ -728,9 +728,6 @@ div{
 .previewPanel {
        display:none;
        position:absolute;
-       z-index: 999 !important;
-       bottom: 100% !important;
-       left: 50% !important;
        /* margin-top:200px !important; */
        /* margin-left:-200px !important; */
        width:400px;
