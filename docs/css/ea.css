@@ -726,45 +726,33 @@ div{
 
 /* START: TOOLTIP CODE */
 .previewPanel {
-    position: absolute;
-    display: none;
-
-    /* Flexibeler formaat */
-    max-width: 400px;
-    max-height: 400px;
-    overflow: auto;
-
-    /* Stijl */
-    padding: 8px 12px;
-    background-color: rgb(255, 242, 168);
-    border: 2px solid #333;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-
-    /* Typografie */
-    font-size: 14px;
-    line-height: 1.4;
-    color: #000;
-
-    /* Animatie */
-    transition: opacity 0.2s ease;
-    z-index: 9999;
+       display:none;
+       position:absolute;
+       margin-top:200px;
+       margin-left:-200px;
+       width:400px;
+       max-height:400px;
+       border: 3px solid black;
+       border-radius: 5px;
+       padding: 5px 5px 5px 5px;
+       background-color: rgb(255, 242, 168);
 }
 
-div.previewPanel .TableRow {
-    padding-bottom: 2px !important;
-    background-color: inherit !important;
+div.previewPanel .TableRow
+{
+       padding-bottom: 2px !important;
+       background-color: inherit !important;
 }
-
-div.previewPanel .TableHeading {
-    background-color: inherit !important;
-    padding-top: 3px;
+div.previewPanel .TableHeading
+{
+       background-color: inherit !important;
+       padding-top:8px;
+       padding-top:3px;
 }
 
 div.previewPanel .TableRowBottomDashed {
-    display: none;
+       display:none;
 }
 /* EIND: TOOLTIP CODE */
-
 
 #EMBEDDED_IMAGES#
