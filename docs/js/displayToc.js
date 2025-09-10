@@ -121,7 +121,7 @@ function mapRectangleMouseOver(sender) {
 }
 
 function mapRectangleMouseOut(sender) {
-    if($(“.previewPanel:hover”).length === 0) {
+    if ($(".previewPanel:hover").length === 0) {
         $(".previewPanel").css("display", "none");
     }
 }

@@ -726,12 +726,12 @@ div{
 
 /* START: TOOLTIP CODE */
 .previewPanel {
-       display: none;
-       position: absolute;
-       margin-top: 200px;
-       margin-left: -200px;
-       width: 400px;
-       max-height: 400px;
+       display:none;
+       position:absolute;
+       margin-top:200px;
+       margin-left:-200px;
+       width:400px;
+       max-height:400px;
        border: 3px solid black;
        border-radius: 5px;
        padding: 5px 5px 5px 5px;
@@ -756,3 +756,4 @@ div.previewPanel .TableRowBottomDashed {
 /* EIND: TOOLTIP CODE */
 
 #EMBEDDED_IMAGES#
+
