@@ -82,7 +82,6 @@ function bulkshow(showpage) {
 }
 // START - TOOLTIP CODE
 function mapRectangleMouseOver(sender) {
-
     $(".previewPanel").css("display", "none");
 
     if (!sender || !sender.href) return;
@@ -91,7 +90,6 @@ function mapRectangleMouseOver(sender) {
     if (!informationURL) return;
 
     jQuery.get(informationURL, function (data) {
-
         var loadedHTML = jQuery.parseHTML(data);
         var docDOM = $('<output>').append(loadedHTML);
         var bodyDOM = $('.ElementPage', docDOM);
@@ -113,11 +111,36 @@ function mapRectangleMouseOver(sender) {
         $(".previewPanel").append(taggedValues.html());
 
         $(".previewPanel").css("display", "block");
-        $(".previewPanel").css("margin-top", Number(array[1]) + "px");
-        $(".previewPanel").css("margin-left", (Number(array[2]) - 5) + "px");
+        $(".previewPanel").css("top", Number(array[1]) + "px");
+        $(".previewPanel").css("left", (Number(array[2]) - 5) + "px");
+        $(".previewPanel").css("margin-top", "0");   // vaste marges niet meer nodig
+        $(".previewPanel").css("margin-left", "0");
 
+        // 👉 check of de tooltip buiten de viewport valt
+        var $tooltip = $(".previewPanel");
+        var offset = $tooltip.offset();
+        var tooltipWidth = $tooltip.outerWidth();
+        var tooltipHeight = $tooltip.outerHeight();
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        // Rechts buiten beeld?
+        if (offset.left + tooltipWidth > windowWidth) {
+            $tooltip.css("left", windowWidth - tooltipWidth - 10 + "px");
+        }
+        // Onderaan buiten beeld?
+        if (offset.top + tooltipHeight > windowHeight) {
+            $tooltip.css("top", windowHeight - tooltipHeight - 10 + "px");
+        }
+        // Links buiten beeld?
+        if (offset.left < 0) {
+            $tooltip.css("left", "10px");
+        }
+        // Boven buiten beeld?
+        if (offset.top < 0) {
+            $tooltip.css("top", "10px");
+        }
     });
-
 }
 
 function mapRectangleMouseOut(sender) {
