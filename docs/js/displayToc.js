@@ -99,7 +99,7 @@ function mapRectangleMouseOver(sender) {
         if (!bodyDOM.length) return;
 
         var itemNotes = $('.ObjectDetailsNotes', bodyDOM);
-        // var taggedValues = $('#TaggedValTable', bodyDOM);
+        var taggedValues = $('#TaggedValTable', bodyDOM);
 
         if (!itemNotes.length && !taggedValues.length) return;
 
@@ -110,11 +110,11 @@ function mapRectangleMouseOver(sender) {
 
         $(".previewPanel").html("");
         $(".previewPanel").append(notes);
-        // $(".previewPanel").append(taggedValues.html());
+        $(".previewPanel").append(taggedValues.html());
 
         $(".previewPanel").css("display", "block");
-        $(".previewPanel").css("margin-top", Number(array[1]) + "px");
-        $(".previewPanel").css("margin-left", (Number(array[2]) - 5) + "px");
+        // $(".previewPanel").css("margin-top", Number(array[1]) + "px");
+        // $(".previewPanel").css("margin-left", (Number(array[2]) - 5) + "px");
 
     });
 
