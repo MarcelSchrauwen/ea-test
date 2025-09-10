@@ -723,42 +723,34 @@ div{
 .welcome_message{
 	padding-top: 15px;
 }
-
 /* START: TOOLTIP CODE */
 .previewPanel {
     display: none;
     position: absolute;
-    top: 0; /* plaats bovenkant uitgelijnd met container */
-    left: 100%; /* standaard rechts van het object */
-    margin-left: 10px; /* kleine afstand van het object */
+    bottom: 0; /* uitgelijnd met de onderkant van het element */
+    left: 0;   /* uitgelijnd met de linkerkant van het element */
+    margin-bottom: 10px; /* kleine afstand van het element */
+    margin-left: 0;
     width: 400px;
-    max-width: calc(100vw - 20px); /* voorkomt dat tooltip buiten scherm valt */
-    max-height: 400px;
+    max-width: calc(100vw - 20px); /* tooltip past zich aan schermbreedte aan */
+    max-height: calc(100vh - 20px); /* tooltip past zich aan schermhoogte aan */
     border: 3px solid black;
     border-radius: 5px;
     padding: 5px;
     background-color: rgb(255, 242, 168);
     box-sizing: border-box;
     z-index: 1000;
-    transform-origin: left top;
+    overflow: auto; /* voorkomt dat inhoud buiten tooltip valt */
 }
 
-/* Tooltip flippen naar links als er te weinig ruimte is */
 .tooltip-container {
-    position: relative;
+    position: relative; /* zorgt dat absolute positie van tooltip werkt */
 }
 
-/* Simulatie van dynamisch flippen met max-width */
 .tooltip-container:hover .previewPanel {
     display: block;
-    /* Als tooltip te breed is, verschuif hem naar links */
-    left: auto;
-    right: 100%;
-    margin-left: 0;
-    margin-right: 10px;
 }
 
-/* Table row styling blijft hetzelfde */
 div.previewPanel .TableRow {
     padding-bottom: 2px !important;
     background-color: inherit !important;
@@ -773,5 +765,6 @@ div.previewPanel .TableRowBottomDashed {
     display: none;
 }
 /* EIND: TOOLTIP CODE */
+
 
 #EMBEDDED_IMAGES#
