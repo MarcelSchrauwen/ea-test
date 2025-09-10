@@ -88,9 +88,8 @@ function mapRectangleMouseOver(sender) {
     const tooltip = $(".previewPanel");
     tooltip.stop(true, true).css({ opacity: 0, visibility: "hidden" }).hide();
 
-    if (!sender || !sender.href) return;
+    if (!sender || !sender.href || !sender.coords) return;
     const informationURL = sender.href;
-    if (!informationURL) return;
 
     jQuery.get(informationURL, function (data) {
         const loadedHTML = jQuery.parseHTML(data);
@@ -105,7 +104,7 @@ function mapRectangleMouseOver(sender) {
         const notes = unescapeHtml(itemNotes.html() || "");
         if (notes === "" && !taggedValues.html()) return;
 
-        // Vul tooltip met content en maak tijdelijk zichtbaar voor meting
+        // Vul tooltip content
         tooltip.html(notes + taggedValues.html())
                .css({
                    display: "block",
@@ -115,28 +114,36 @@ function mapRectangleMouseOver(sender) {
                    visibility: "hidden"
                });
 
-        // Delay + positionering + fade-in
+        // Delay + fade-in
         tooltipTimeout = setTimeout(function () {
-            const rect = sender.getBoundingClientRect();
-            const offset = 8; // ruimte tussen element en tooltip
+
+            // Bereken positie op basis van coords van <area> + offset van diagram
+            const diagramOffset = $(".diagramContainer").offset(); // container van de image map
+            const coords = sender.coords.split(','); // x1,y1,x2,y2 van rechthoek
+            const x = Number(coords[0]);
+            const y = Number(coords[1]);
+
+            let left = diagramOffset.left + x;
+            let top = diagramOffset.top + y;
+
+            const offset = 8; // afstand tooltip
             const tooltipWidth = tooltip.outerWidth();
             const tooltipHeight = tooltip.outerHeight();
             const viewportWidth = $(window).width();
             const viewportHeight = $(window).height();
 
-            let top = rect.bottom + offset;
-            let left = rect.left;
-
             // Slimme herpositionering
-            if (top + tooltipHeight > viewportHeight) {
-                top = rect.top - tooltipHeight - offset;
+            if (top + tooltipHeight + offset > viewportHeight) {
+                top = top - tooltipHeight - offset; // plaats boven
+            } else {
+                top = top + offset; // plaats onder
             }
             if (left + tooltipWidth > viewportWidth) {
                 left = viewportWidth - tooltipWidth - offset;
             }
             if (left < 0) left = offset;
 
-            // Plaats tooltip en fade-in
+            // Tooltip positioneren en fade-in
             tooltip.css({
                 position: "absolute",
                 top: top + window.scrollY + "px",
