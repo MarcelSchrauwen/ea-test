@@ -727,7 +727,10 @@ div{
 /* START: TOOLTIP CODE */
 .previewPanel {
        display:none;
-       position:relative;
+       position:absolute;
+       z-index: 1 !important;
+       bottom: 100% !important;
+       left: 50% !important;
        /* margin-top:200px !important; */
        /* margin-left:-200px !important; */
        width:400px;
