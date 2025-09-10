@@ -730,11 +730,11 @@ div{
        position:absolute;
        /* margin-top:200px;
        margin-left:-200px; */
-       width:400px; /*
+       width:400px;
        max-height:400px;
-       border: 3px solid black;
-       border-radius: 5px;
-       padding: 5px 5px 5px 5px; */
+       border: 1px solid grey;
+       border-radius: 0px;
+       padding: 5px 5px 5px 5px;
        background-color: white;
 }
 /*
