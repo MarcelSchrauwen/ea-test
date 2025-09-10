@@ -727,15 +727,15 @@ div{
 /* START: TOOLTIP CODE */
 .previewPanel {
        display:none;
-       position:absolute;
+       position:relative;
        margin-top:200px;
        margin-left:-200px;
        width:400px;
        max-height:400px;
        border: 3px solid black;
-       border-radius: 5px;
+       border-radius: 1px;
        padding: 5px 5px 5px 5px;
-       background-color: rgb(255, 242, 168);
+       background-color: white;
 }
 
 div.previewPanel .TableRow
