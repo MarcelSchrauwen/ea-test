@@ -86,7 +86,7 @@ let tooltipTimeout;
 function mapRectangleMouseOver(sender) {
     clearTimeout(tooltipTimeout);
     const tooltip = $(".previewPanel");
-    tooltip.stop(true, true).hide();
+    tooltip.stop(true, true).css({ opacity: 0, visibility: "hidden" }).hide();
 
     if (!sender || !sender.href) return;
     const informationURL = sender.href;
@@ -115,7 +115,7 @@ function mapRectangleMouseOver(sender) {
                    visibility: "hidden"
                });
 
-        // Delay + fade-in
+        // Delay + positionering + fade-in
         tooltipTimeout = setTimeout(function () {
             const rect = sender.getBoundingClientRect();
             const offset = 8; // ruimte tussen element en tooltip
@@ -136,12 +136,14 @@ function mapRectangleMouseOver(sender) {
             }
             if (left < 0) left = offset;
 
+            // Plaats tooltip en fade-in
             tooltip.css({
                 position: "absolute",
                 top: top + window.scrollY + "px",
                 left: left + window.scrollX + "px",
-                visibility: "visible"
-            }).hide().fadeIn(200);
+                visibility: "visible",
+                opacity: 0
+            }).animate({ opacity: 1 }, 200);
 
         }, 250); // 250ms delay
     });
