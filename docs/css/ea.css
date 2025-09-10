@@ -689,7 +689,7 @@ body{
 
 }
 .diagram_image {
-    max-width: 990px;
+    /* max-width: 990px; */
 	min-width: 65%;
 	overflow: auto;
 	height: auto;
