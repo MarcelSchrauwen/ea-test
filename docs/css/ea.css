@@ -723,48 +723,37 @@ div{
 .welcome_message{
 	padding-top: 15px;
 }
+
 /* START: TOOLTIP CODE */
 .previewPanel {
-    display: none;
-    position: absolute;
-    bottom: 0; /* uitgelijnd met de onderkant van het element */
-    left: 0;   /* uitgelijnd met de linkerkant van het element */
-    margin-bottom: 10px; /* kleine afstand van het element */
-    margin-left: 0;
-    width: 400px;
-    max-width: calc(100vw - 20px); /* tooltip past zich aan schermbreedte aan */
-    max-height: calc(100vh - 20px); /* tooltip past zich aan schermhoogte aan */
-    border: 3px solid black;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: rgb(255, 242, 168);
-    box-sizing: border-box;
-    z-index: 1000;
-    overflow: auto; /* voorkomt dat inhoud buiten tooltip valt */
+       display:none;
+       position:absolute;
+       margin-top:200px;
+       margin-left:-200px;
+       width:400px;
+       max-height:400px;
+       border: 3px solid black;
+       border-radius: 5px;
+       padding: 5px 5px 5px 5px;
+       background-color: rgb(255, 242, 168);
 }
 
-.tooltip-container {
-    position: relative; /* zorgt dat absolute positie van tooltip werkt */
+div.previewPanel .TableRow
+{
+       padding-bottom: 2px !important;
+       background-color: inherit !important;
 }
-
-.tooltip-container:hover .previewPanel {
-    display: block;
-}
-
-div.previewPanel .TableRow {
-    padding-bottom: 2px !important;
-    background-color: inherit !important;
-}
-
-div.previewPanel .TableHeading {
-    background-color: inherit !important;
-    padding-top: 3px;
+div.previewPanel .TableHeading
+{
+       background-color: inherit !important;
+       padding-top:8px;
+       padding-top:3px;
 }
 
 div.previewPanel .TableRowBottomDashed {
-    display: none;
+       display:none;
 }
 /* EIND: TOOLTIP CODE */
 
-
 #EMBEDDED_IMAGES#
+
