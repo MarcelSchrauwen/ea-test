@@ -83,12 +83,12 @@ function bulkshow(showpage) {
 // START - TOOLTIP CODE
 let tooltipTimeout;
 
-function mapRectangleMouseOver(sender) {
+function mapRectangleMouseOver(sender, event) {
     clearTimeout(tooltipTimeout);
     const tooltip = $(".previewPanel");
     tooltip.stop(true, true).css({ opacity: 0, visibility: "hidden" }).hide();
 
-    if (!sender || !sender.href || !sender.coords) return;
+    if (!sender || !sender.href) return;
     const informationURL = sender.href;
 
     jQuery.get(informationURL, function (data) {
@@ -116,38 +116,30 @@ function mapRectangleMouseOver(sender) {
 
         // Delay + fade-in
         tooltipTimeout = setTimeout(function () {
+            const offset = 8; // afstand tooltip van muis
+            let left = event.pageX + offset;
+            let top = event.pageY + offset;
 
-            // Bereken positie op basis van coords van <area> + offset van diagram
-            const diagramOffset = $(".diagramContainer").offset(); // container van de image map
-            const coords = sender.coords.split(','); // x1,y1,x2,y2 van rechthoek
-            const x = Number(coords[0]);
-            const y = Number(coords[1]);
-
-            let left = diagramOffset.left + x;
-            let top = diagramOffset.top + y;
-
-            const offset = 8; // afstand tooltip
             const tooltipWidth = tooltip.outerWidth();
             const tooltipHeight = tooltip.outerHeight();
             const viewportWidth = $(window).width();
             const viewportHeight = $(window).height();
 
             // Slimme herpositionering
-            if (top + tooltipHeight + offset > viewportHeight) {
-                top = top - tooltipHeight - offset; // plaats boven
-            } else {
-                top = top + offset; // plaats onder
+            if (top + tooltipHeight > viewportHeight + $(window).scrollTop()) {
+                top = event.pageY - tooltipHeight - offset;
             }
-            if (left + tooltipWidth > viewportWidth) {
-                left = viewportWidth - tooltipWidth - offset;
+            if (left + tooltipWidth > viewportWidth + $(window).scrollLeft()) {
+                left = event.pageX - tooltipWidth - offset;
             }
             if (left < 0) left = offset;
+            if (top < 0) top = offset;
 
             // Tooltip positioneren en fade-in
             tooltip.css({
                 position: "absolute",
-                top: top + window.scrollY + "px",
-                left: left + window.scrollX + "px",
+                top: top + "px",
+                left: left + "px",
                 visibility: "visible",
                 opacity: 0
             }).animate({ opacity: 1 }, 200);
