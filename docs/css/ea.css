@@ -727,7 +727,7 @@ div{
 /* START: TOOLTIP CODE */
 .previewPanel {
        display:none;
-       position:relative;
+       position:absolute;
        margin-top:200px;
        margin-left:-200px;
        width:400px;
