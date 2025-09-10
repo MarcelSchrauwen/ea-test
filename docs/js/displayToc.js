@@ -114,7 +114,7 @@ function mapRectangleMouseOver(sender) {
 
         $(".previewPanel").css("display", "block");
         $(".previewPanel").css("margin-top", (Number(array[1]) - 100) + "px");
-        $(".previewPanel").css("margin-left", (Number(array[2]) - 50) + "px");
+        $(".previewPanel").css("margin-left", (Number(array[2]) - 100) + "px");
 
     });
 
