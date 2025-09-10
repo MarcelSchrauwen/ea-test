@@ -115,30 +115,13 @@ function mapRectangleMouseOver(sender) {
         var tooltipWidth = $(".previewPanel").outerWidth();
         var tooltipHeight = $(".previewPanel").outerHeight();
 
-        // coords van <area>
-        var array = sender.coords.split(',');
-        var x1 = Number(array[0]);
-        var y1 = Number(array[1]);
-        var x2 = Number(array[2]);
-        var y2 = Number(array[3]);
+        // gebruik getBoundingClientRect voor precieze positie
+        var rect = sender.getBoundingClientRect();
+        var scrollTop  = $(window).scrollTop();
+        var scrollLeft = $(window).scrollLeft();
 
-        // afbeelding waarop <map> zit
-        var imageElem = $('img[usemap="#' + sender.parentNode.name + '"]');
-
-        var imgOffset = { top: 0, left: 0 };
-        if (imageElem.length > 0) {
-            imgOffset = imageElem.offset();
-        }
-
-        // horizontaal midden van area
-        var rectCenterX = imgOffset.left + (x1 + x2) / 2;
-
-        // verticaal net boven area
-        var rectTopY = imgOffset.top + y1;
-
-        // tooltip links en boven positie
-        var left = rectCenterX - (tooltipWidth / 2);
-        var top = rectTopY - tooltipHeight - 2; // 2px marge
+        var left = rect.left + scrollLeft + (rect.width / 2) - (tooltipWidth / 2);
+        var top  = rect.top + scrollTop - tooltipHeight - 2; // 2px marge boven het element
 
         $(".previewPanel").css({
             "margin-left": left + "px",
