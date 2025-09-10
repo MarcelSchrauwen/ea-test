@@ -130,11 +130,15 @@ function mapRectangleMouseOver(sender) {
 
         var imgOffset = imageElem.offset();
 
-        // horizontaal midden van area
-        var rectCenterX = imgOffset.left + (x1 + x2) / 2;
+        // schaalfactor voor width/height
+        var scaleX = imageElem.width() / imageElem[0].naturalWidth;
+        var scaleY = imageElem.height() / imageElem[0].naturalHeight;
 
-        // verticaal net boven area
-        var rectTopY = imgOffset.top + y1;
+        // horizontaal midden van area (geschaald)
+        var rectCenterX = imgOffset.left + ((x1 + x2) / 2) * scaleX;
+
+        // verticaal net boven area (geschaald)
+        var rectTopY = imgOffset.top + (y1 * scaleY);
 
         // tooltip links en boven positie
         var left = rectCenterX - (tooltipWidth / 2);
