@@ -113,8 +113,8 @@ function mapRectangleMouseOver(sender) {
         // $(".previewPanel").append(taggedValues.html()); // niet meer nodig
 
         $(".previewPanel").css("display", "block");
-        $(".previewPanel").css("margin-top", (Number(array[1]) - 100) + "px");
-        $(".previewPanel").css("margin-left", (Number(array[2]) - 100) + "px");
+        $(".previewPanel").css("margin-top", (Number(array[1]) - 200) + "px");
+        $(".previewPanel").css("margin-left", (Number(array[2]) - 400) + "px");
 
     });
 
