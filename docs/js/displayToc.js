@@ -11,7 +11,6 @@ function toggleItem(item) {
                 titles[i].style.background = "#FFFFFF";
                 titles[i].style.color = "#000000";
             } else {
-
                 titles[i].style.background = "#DDDDDD";
                 titles[i].style.color = "#666666";
             }
@@ -22,12 +21,13 @@ function toggleItem(item) {
             height = toggleItemDetails(tabs, item);
         }
 
-        /* table.style.height = height + aparent.clientHeight + table.clientHeight + "px";*/
+        /* table.style.height = height + aparent.clientHeight + table.clientHeight + "px"; */
     }
 }
+
 function toggleItemDetails(tabs, title) {
     var i,
-    height = 0;
+        height = 0;
 
     for (i = 0; i < tabs.length; i++) {
         var tab = tabs[i];
@@ -35,8 +35,9 @@ function toggleItemDetails(tabs, title) {
         if (tab.id == title + "Table") {
             tab.style.display = "block";
             height = tab.clientHeight;
-        } else
+        } else {
             tab.style.display = "none";
+        }
     }
 
     return height;
@@ -72,17 +73,20 @@ function bulkshow(showpage) {
         }
 
         if (blockdiv !== undefined) {
-            tableSel = null;
+            var tableSel = null;
             var tab = blockdiv.getElementsByClassName('TableGroup');
             if (tab.length > 0) {
-                toggleItem(tab[0].getElementsByTagName('li')[0].id.replace("Title", ""), tab[0].getElementsByTagName('li')[0]);
+                toggleItem(
+                    tab[0].getElementsByTagName('li')[0].id.replace("Title", ""),
+                    tab[0].getElementsByTagName('li')[0]
+                );
             }
         }
     }
 }
+
 // START - TOOLTIP CODE
 function mapRectangleMouseOver(sender) {
-
     $(".previewPanel").css("display", "none");
 
     if (!sender || !sender.href) return;
@@ -91,7 +95,6 @@ function mapRectangleMouseOver(sender) {
     if (!informationURL) return;
 
     jQuery.get(informationURL, function (data) {
-
         var loadedHTML = jQuery.parseHTML(data);
         var docDOM = $('<output>').append(loadedHTML);
         var bodyDOM = $('.ElementPage', docDOM);
@@ -112,15 +115,19 @@ function mapRectangleMouseOver(sender) {
         $(".previewPanel").append(notes);
         $(".previewPanel").append(taggedValues.html());
 
-        var offsetY = 10; // 10px boven het blok
-		var tooltipWidth = $(".previewPanel").outerWidth();
-		$(".previewPanel").css({
-			display: "block",
-			top: (Number(array[1]) - offsetY) + "px",
-			left: (Number(array[2]) - tooltipWidth) + "px",
-			position: "absolute"
-		});
+        $(".previewPanel").css({ display: "block" });
 
+        // Tooltip iets boven het blok
+        var offsetY = 10; // pixels boven het blok
+        $(".previewPanel").css("top", (Number(array[1]) - offsetY) + "px");
+
+        // Tooltip rechts uitgelijnd
+        var tooltipWidth = $(".previewPanel").outerWidth();
+        $(".previewPanel").css("left", (Number(array[2]) - tooltipWidth) + "px");
+
+        // Zorg dat tooltip absoluut gepositioneerd is
+        $(".previewPanel").css("position", "absolute");
+    });
 }
 
 function mapRectangleMouseOut(sender) {
