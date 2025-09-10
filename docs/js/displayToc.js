@@ -81,76 +81,49 @@ function bulkshow(showpage) {
     }
 }
 // START - TOOLTIP CODE
-let tooltipTimeout;
+function mapRectangleMouseOver(sender) {
 
-function mapRectangleMouseOver(sender, event) {
-    clearTimeout(tooltipTimeout);
-    const tooltip = $(".previewPanel");
-    tooltip.stop(true, true).css({ opacity: 0, visibility: "hidden" }).hide();
+    $(".previewPanel").css("display", "none");
 
     if (!sender || !sender.href) return;
-    const informationURL = sender.href;
+
+    var informationURL = sender.href;
+    if (!informationURL) return;
 
     jQuery.get(informationURL, function (data) {
-        const loadedHTML = jQuery.parseHTML(data);
-        const docDOM = $('<output>').append(loadedHTML);
-        const bodyDOM = $('.ElementPage', docDOM);
+
+        var loadedHTML = jQuery.parseHTML(data);
+        var docDOM = $('<output>').append(loadedHTML);
+        var bodyDOM = $('.ElementPage', docDOM);
+
         if (!bodyDOM.length) return;
 
-        const itemNotes = $('.ObjectDetailsNotes', bodyDOM);
-        const taggedValues = $('#TaggedValTable', bodyDOM);
+        var itemNotes = $('.ObjectDetailsNotes', bodyDOM);
+        var taggedValues = $('#TaggedValTable', bodyDOM);
+
         if (!itemNotes.length && !taggedValues.length) return;
 
-        const notes = unescapeHtml(itemNotes.html() || "");
+        var notes = unescapeHtml(itemNotes.html() || "");
         if (notes === "" && !taggedValues.html()) return;
 
-        // Vul tooltip content
-        tooltip.html(notes + taggedValues.html())
-               .css({
-                   display: "block",
-                   top: 0,
-                   left: 0,
-                   opacity: 0,
-                   visibility: "hidden"
-               });
+        var array = sender.coords.split(',');
 
-        // Delay + fade-in
-        tooltipTimeout = setTimeout(function () {
-            const offset = 8; // afstand tooltip van muis
-            let left = event.pageX + offset;
-            let top = event.pageY + offset;
+        $(".previewPanel").html("");
+        $(".previewPanel").append(notes);
+        $(".previewPanel").append(taggedValues.html());
 
-            const tooltipWidth = tooltip.outerWidth();
-            const tooltipHeight = tooltip.outerHeight();
-            const viewportWidth = $(window).width();
-            const viewportHeight = $(window).height();
+        $(".previewPanel").css("display", "block");
+        $(".previewPanel").css("margin-top", Number(array[1]) + "px");
+        $(".previewPanel").css("margin-left", (Number(array[2]) - 5) + "px");
 
-            // Slimme herpositionering
-            if (top + tooltipHeight > viewportHeight + $(window).scrollTop()) {
-                top = event.pageY - tooltipHeight - offset;
-            }
-            if (left + tooltipWidth > viewportWidth + $(window).scrollLeft()) {
-                left = event.pageX - tooltipWidth - offset;
-            }
-            if (left < 0) left = offset;
-            if (top < 0) top = offset;
-
-            // Tooltip positioneren en fade-in
-            tooltip.css({
-                position: "absolute",
-                top: top + "px",
-                left: left + "px",
-                visibility: "visible",
-                opacity: 0
-            }).animate({ opacity: 1 }, 200);
-
-        }, 250); // 250ms delay
     });
+
 }
 
 function mapRectangleMouseOut(sender) {
-    clearTimeout(tooltipTimeout);
-    $(".previewPanel").stop(true, true).fadeOut(150);
+    if ($(".previewPanel:hover").length === 0) {
+        $(".previewPanel").css("display", "none");
+    }
 }
 
 function unescapeHtml(safe) {
