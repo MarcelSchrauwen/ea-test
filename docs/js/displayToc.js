@@ -123,14 +123,16 @@ function mapRectangleMouseOver(sender) {
         var y2 = Number(array[3]);
 
         // afbeelding waarop <map> zit
-        var img = $(sender).closest('map').attr('name');
-        var imageElem = $('img[usemap="#' + img + '"]');
+        var imageElem = $('img[usemap="#' + sender.parentNode.name + '"]');
 
-        // afbeelding offset
-        var imgOffset = imageElem.offset();
+        var imgOffset = { top: 0, left: 0 };
+        if (imageElem.length > 0) {
+            imgOffset = imageElem.offset();
+        }
 
         // horizontaal midden van area
         var rectCenterX = imgOffset.left + (x1 + x2) / 2;
+
         // verticaal net boven area
         var rectTopY = imgOffset.top + y1;
 
