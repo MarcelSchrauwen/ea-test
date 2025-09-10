@@ -81,9 +81,11 @@ function bulkshow(showpage) {
     }
 }
 // START - TOOLTIP CODE
-function mapRectangleMouseOver(sender) {
+let tooltipTimeout;
 
-    $(".previewPanel").css("display", "none");
+function mapRectangleMouseOver(sender) {
+    clearTimeout(tooltipTimeout);
+    $(".previewPanel").stop(true, true).hide();
 
     if (!sender || !sender.href) return;
 
@@ -91,7 +93,6 @@ function mapRectangleMouseOver(sender) {
     if (!informationURL) return;
 
     jQuery.get(informationURL, function (data) {
-
         var loadedHTML = jQuery.parseHTML(data);
         var docDOM = $('<output>').append(loadedHTML);
         var bodyDOM = $('.ElementPage', docDOM);
@@ -106,24 +107,47 @@ function mapRectangleMouseOver(sender) {
         var notes = unescapeHtml(itemNotes.html() || "");
         if (notes === "" && !taggedValues.html()) return;
 
-        var array = sender.coords.split(',');
-
+        // Tooltip content vullen
         $(".previewPanel").html("");
         $(".previewPanel").append(notes);
         $(".previewPanel").append(taggedValues.html());
 
-        $(".previewPanel").css("display", "block");
-        $(".previewPanel").css("margin-top", Number(array[1]) + "px");
-        $(".previewPanel").css("margin-left", (Number(array[2]) - 5) + "px");
+        // Bepalen positie van het aangeklikte element
+        var rect = sender.getBoundingClientRect();
+        var tooltip = $(".previewPanel");
 
+        var offset = 8; // ruimte tussen element en tooltip
+        var tooltipWidth = tooltip.outerWidth();
+        var tooltipHeight = tooltip.outerHeight();
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
+
+        var top = rect.bottom + offset;
+        var left = rect.left;
+
+        // Slimme herpositionering
+        if (top + tooltipHeight > viewportHeight) {
+            top = rect.top - tooltipHeight - offset;
+        }
+        if (left + tooltipWidth > viewportWidth) {
+            left = viewportWidth - tooltipWidth - offset;
+        }
+        if (left < 0) left = offset;
+
+        // Delay + fade-in
+        tooltipTimeout = setTimeout(function () {
+            tooltip.css({
+                position: "absolute",
+                top: top + window.scrollY + "px",
+                left: left + window.scrollX + "px"
+            }).fadeIn(200);
+        }, 250); // 250ms delay
     });
-
 }
 
 function mapRectangleMouseOut(sender) {
-    if ($(".previewPanel:hover").length === 0) {
-        $(".previewPanel").css("display", "none");
-    }
+    clearTimeout(tooltipTimeout);
+    $(".previewPanel").stop(true, true).fadeOut(150);
 }
 
 function unescapeHtml(safe) {
