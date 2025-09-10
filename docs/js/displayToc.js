@@ -106,48 +106,15 @@ function mapRectangleMouseOver(sender) {
         var notes = unescapeHtml(itemNotes.html() || "");
         if (notes === "" && !taggedValues.html()) return;
 
+        var array = sender.coords.split(',');
+
         $(".previewPanel").html("");
         $(".previewPanel").append(notes);
         $(".previewPanel").append(taggedValues.html());
+
         $(".previewPanel").css("display", "block");
-
-        // tooltip-afmetingen
-        var tooltipWidth = $(".previewPanel").outerWidth();
-        var tooltipHeight = $(".previewPanel").outerHeight();
-
-        // coords van <area>
-        var array = sender.coords.split(',');
-        var x1 = Number(array[0]);
-        var y1 = Number(array[1]);
-        var x2 = Number(array[2]);
-        var y2 = Number(array[3]);
-
-        // afbeelding waarop <map> zit
-        var mapName = sender.parentNode.name;
-        var imageElem = $('img[usemap="#' + mapName + '"]');
-
-        if (imageElem.length === 0) return;
-
-        var imgOffset = imageElem.offset();
-
-        // schaalfactor voor width/height
-        var scaleX = imageElem.width() / imageElem[0].naturalWidth;
-        var scaleY = imageElem.height() / imageElem[0].naturalHeight;
-
-        // horizontaal midden van area (geschaald)
-        var rectCenterX = imgOffset.left + ((x1 + x2) / 2) * scaleX;
-
-        // verticaal net boven area (geschaald)
-        var rectTopY = imgOffset.top + (y1 * scaleY);
-
-        // tooltip links en boven positie
-        var left = rectCenterX - (tooltipWidth / 2);
-        var top  = rectTopY - tooltipHeight - 2; // 2px marge boven
-
-        $(".previewPanel").css({
-            "margin-left": left + "px",
-            "margin-top": top + "px"
-        });
+        $(".previewPanel").css("margin-top", Number(array[1]) + "px");
+        $(".previewPanel").css("margin-left", (Number(array[2]) - 5) + "px");
 
     });
 
