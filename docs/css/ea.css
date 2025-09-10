@@ -681,15 +681,15 @@ html{
   height: 100%;
 }
 body{
-  max-width: 1400px;
-  /* max-width: 99%;  */
+  /* max-width: 1400px;   */
+  max-width: 99%;
   margin-left: auto;
   margin-right: auto;
   height: 100%;
 
 }
 .diagram_image {
-    /* max-width: 990px; */
+    max-width: 990px;
 	min-width: 65%;
 	overflow: auto;
 	height: auto;
