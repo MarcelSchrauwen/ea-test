@@ -729,13 +729,13 @@ div{
        display:none;
        position:absolute;
        /* margin-top:200px;
-       margin-left:-200px;
-       width:400px;
+       margin-left:-200px; */
+       width:400px; /*
        max-height:400px;
        border: 3px solid black;
        border-radius: 5px;
-       padding: 5px 5px 5px 5px;
-       background-color: rgb(255, 242, 168); */
+       padding: 5px 5px 5px 5px; */
+       background-color: white;
 }
 /*
 div.previewPanel .TableRow
