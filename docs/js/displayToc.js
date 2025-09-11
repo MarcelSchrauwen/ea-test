@@ -99,37 +99,22 @@ function mapRectangleMouseOver(sender) {
         if (!bodyDOM.length) return;
 
         var itemNotes = $('.ObjectDetailsNotes', bodyDOM);
+        var taggedValues = $('#TaggedValTable', bodyDOM);
 
-        if (!itemNotes.length) return;
+        if (!itemNotes.length && !taggedValues.length) return;
 
         var notes = unescapeHtml(itemNotes.html() || "");
-        if (notes === "") return;
+        if (notes === "" && !taggedValues.html()) return;
 
         var array = sender.coords.split(',');
 
         $(".previewPanel").html("");
         $(".previewPanel").append(notes);
+        $(".previewPanel").append(taggedValues.html());
 
-        var tooltip = $(".previewPanel");
-        tooltip.css("display", "block");
-
-        var tooltipWidth = tooltip.outerWidth();
-        var tooltipHeight = tooltip.outerHeight();
-
-        // Bereken positie: rechterzijde van tooltip gelijk met rechterzijde object
-        // array[2] = rechterzijde van het object
-        var left = Number(array[2]) - tooltipWidth;
-
-        // Onderzijde van tooltip 5px boven bovenzijde object
-        // array[1] = bovenzijde van het object
-        var top = Number(array[1]) - tooltipHeight - 5;
-
-        // zorg dat tooltip niet buiten venster valt
-        if (left < 0) left = 5;
-        if (top < 0) top = 5;
-
-        tooltip.css("margin-top", top + "px");
-        tooltip.css("margin-left", left + "px");
+        $(".previewPanel").css("display", "block");
+        $(".previewPanel").css("margin-top", Number(array[1]) - 200 )+ "px");
+        $(".previewPanel").css("margin-left", (Number(array[2]) - 400) + "px");
 
     });
 
