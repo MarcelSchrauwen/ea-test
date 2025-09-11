@@ -99,19 +99,17 @@ function mapRectangleMouseOver(sender) {
         if (!bodyDOM.length) return;
 
         var itemNotes = $('.ObjectDetailsNotes', bodyDOM);
-        var taggedValues = $('#TaggedValTable', bodyDOM);
-
-        if (!itemNotes.length && !taggedValues.length) return;
+        
+        if (!itemNotes.length) return;
 
         var notes = unescapeHtml(itemNotes.html() || "");
-        if (notes === "" && !taggedValues.html()) return;
+        if (notes === "" ()) return;
 
         var array = sender.coords.split(',');
 
         $(".previewPanel").html("");
         $(".previewPanel").append(notes);
-        $(".previewPanel").append(taggedValues.html());
-
+        
         $(".previewPanel").css("display", "block");
         $(".previewPanel").css("margin-top", Number(array[1]) + "px");
         $(".previewPanel").css("margin-left", (Number(array[2]) - 5) + "px");
