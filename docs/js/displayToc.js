@@ -111,8 +111,8 @@ function mapRectangleMouseOver(sender) {
         $(".previewPanel").append(notes);
         
         $(".previewPanel").css("display", "block");
-        $(".previewPanel").css("margin-top", Number(array[1]) + "px");
-        $(".previewPanel").css("margin-left", (Number(array[2]) - 5) + "px");
+        $(".previewPanel").css("margin-top", Number(array[1]) - 50 ) + "px");
+        $(".previewPanel").css("margin-left", (Number(array[2]) - 50 ) + "px");
 
     });
 
