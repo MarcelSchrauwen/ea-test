@@ -110,14 +110,14 @@ function mapRectangleMouseOver(sender) {
         
         $(".previewPanel").css("margin-top", (Number(array[1]) - 100) + "px");
         $(".previewPanel").css("margin-left", (Number(array[2]) - 400) + "px");
-        $(".previewPanel").stop(true, true).fadeIn(400); // stop oude animaties, dan fade in
+        $(".previewPanel").stop(true, true).fadeIn(800); // stop oude animaties, dan fade in
     });
 
 }
 
 function mapRectangleMouseOut(sender) {
     if ($(".previewPanel:hover").length === 0) {
-        $(".previewPanel").stop(true, true).fadeOut(400); // stop oude animaties, dan fade out
+        $(".previewPanel").stop(true, true).fadeOut(800); // stop oude animaties, dan fade out
     }
 }
 
