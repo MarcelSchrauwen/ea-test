@@ -103,7 +103,7 @@ function mapRectangleMouseOver(sender) {
         if (!itemNotes.length) return;
 
         var notes = unescapeHtml(itemNotes.html() || "");
-        if (notes === "" ()) return;
+        if (notes === "") return;
 
         var array = sender.coords.split(',');
 
