@@ -730,7 +730,7 @@ div{
 	position:absolute;
 	/* margin-top:200px;
 	margin-left:-200px; */
-	overflow: hidden;   
+	overflow: auto;   
 	width:400px;
 	max-height:200px;
 	border: 1px solid grey;
