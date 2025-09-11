@@ -110,16 +110,16 @@ function mapRectangleMouseOver(sender) {
         $(".previewPanel").html("");
         $(".previewPanel").append(notes);
         
-        $(".previewPanel").css("display", "block");
         $(".previewPanel").css("margin-top", (Number(array[1]) - 100) + "px");
-		$(".previewPanel").css("margin-left", (Number(array[2]) - 400) + "px");
+        $(".previewPanel").css("margin-left", (Number(array[2]) - 400) + "px");
+        $(".previewPanel").fadeIn(200); // <-- fade in
     });
 
 }
 
 function mapRectangleMouseOut(sender) {
     if ($(".previewPanel:hover").length === 0) {
-        $(".previewPanel").css("display", "none");
+        $(".previewPanel").fadeOut(200); // <-- fade out
     }
 }
 
