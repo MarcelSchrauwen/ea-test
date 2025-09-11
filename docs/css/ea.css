@@ -22,8 +22,8 @@ B.red {
 }
 BODY {
 	background-color: #EEEEEE;
-	font-family: "Arial", sans-serif;
-	/* font-size: 14px; */
+	font-family: "Open Sans", "Arial", sans-serif;
+	font-size: 16px;
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
@@ -34,6 +34,7 @@ BODY.Content {
 CODE {
 	color: #990000;
 	font-family: "Courier New", Courier, mono;
+	font-size: 14px;
 }
 DIV.item {
 	font-style: normal;
@@ -47,7 +48,7 @@ DIV.item {
 DIV.link {
 	margin-left: 12px;
 	padding-bottom: 5px;
-	padding-top: 5px
+	padding-top: 5px;
 }
 DIV.menu {
 	background-color: #CDE5FF;
@@ -86,33 +87,34 @@ H1 {
 H2 {
 	color: #000000;
 	/* font-size: 80%; */
-	font-size: 16px;
+	font-size: 20px;
 	font-weight: bold;
 	margin-bottom: 3px;
 	margin-left: 10px;
 	margin-top: 0px;
-	padding-left: 0px
+	padding-left: 0px;
 }
 H3 {
 	color: #000000;
 	/* font-size: 80%; */
-	font-size: 14px;
+	font-size: 18px;
 	font-weight: bold;
 	margin-bottom: -5px;
 	margin-left: 10px;
-	margin-top: 20px
+	margin-top: 20px;
 }
 H4 {
 	color: #000000;
 	/* font-size: 70%; */
-	font-size: 12px;
+	font-size: 16px;
 	font-weight: bold;
 	margin-bottom: 0px;
 	margin-top: 15px;
-	padding-bottom: 0px
+	padding-bottom: 0px;
 }
 LI {
-	margin-left: 0px
+	margin-left: 0px;
+	font-size: 16px;
 }
 OL {
 	color: #000000;
@@ -123,26 +125,23 @@ P {
 	/* font-family: "Verdana", sans-serif; */
 	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 	/* font-size: 70%; */
-	font-size: 14px;
+	font-size: 16px;
 	/* line-height: 12pt; */
-	line-height: 21px;
+	line-height: 1.5;
 	margin: 10px 10px 0px 10px;
 }
 
-P {
-	/* font-size: 8pt; */
-}
 PRE {
 	background-color: #FDEDBB;
 	font: 9pt "Courier New", Courier, mono;
 	padding: 5pt;
 	white-space: pre;
-	width: 100%
+	width: 100%;
 }
 TD {
 	color: #000000;
 	/* font-size: 8pt */
-	font-size: 14px;
+	font-size: 16px;
 }
 UL {
 	color: #000000;
@@ -264,7 +263,7 @@ UL {
 .HeaderTable {
 	padding: 5px;
 	width : 100%;
-}_
+}
 .help {
 	margin-right: 10px;
 	text-align: right;
@@ -335,7 +334,6 @@ UL {
 	display: none;
 	margin-top: 17px;
 	border: 1px solid #999999;
-	/* height: 693px; */
 	height: auto;
 	overflow: scroll;
 }
@@ -390,14 +388,10 @@ UL {
 	margin: 10px 15px 4px 15px;	
 }
 .ObjectDetailsNotes {
-	/* background-color: #FAFAFA; */
-	/* border: 1px solid #EEEEEE; */
 	color: #1A1A1A;
 	height: expression(this.scrollHeight > 200 ? "200px" : "auto");
-	/* max-height: 200px; */
 	overflow: auto;
 	margin: 5px;
-	/* margin-top:20px; */
 	margin-top:10px;
 	padding: 5px;
 }
@@ -408,7 +402,8 @@ UL {
 	width: 130px;
 }
 .ObjectDetailsValue {
-	line-height: 15px;
+	/* line-height: 15px; */
+	line-height: 20px;
 	color: #333333;
 	vertical-align: top;
 }
@@ -418,40 +413,40 @@ UL {
 	font-style: italic;
 }
 .ObjectScenarioDesc {
-	font-size: 70%;
+	font-size: 12px;
 }
 .ObjectScenarioName {
-	font-size: 70%;
+	font-size: 12px;
 	text-decoration: underline;
 }
 .ObjectSubTitle {
+	font-size: 12px;
 	color: #666699;
 }
 .ObjectSubTitleConstraint {
+	font-size: 12px;
 	color: #000080;
-	font-size: 70%;
 	font-style: italic;
 }
 .ObjectSubTitleIntReq {
+	font-size: 12px;
 	color: #000080;
-	font-size: 70%;
 	font-style : italic;
 }
 .ObjectSubTitleScenario {
+	font-size: 12px;
 	color: #000080;
-	font-size: 70%;
 	font-style: italic;
 }
 .ObjectSubTitleTaggedValues {
+	font-size: 12px;
 	color: #000080;
-	font-size: 70%;
 	font-style: italic;
 }
 .ObjectTitle {
 	/* font-size: 14px; */
-	font-size: 16x;
+	font-size: 18px;
 	font-weight: bold;
-	/* margin-top: 25px; */
 	color: #4a4a4a;
 }
 .PageBody {
@@ -486,12 +481,13 @@ UL {
 	background-color: #F5F7FF;
 }
 .TableField1 {
-	font-size: 60%;
+	font-size: 12px;
 	padding: 5px;
 	vertical-align: top;
 }
 .TableField2 {
 	padding: 5px;
+	font-size: 16px;
 }
 .TableGroup {
 	margin-right: 0px;
@@ -511,12 +507,12 @@ UL {
 	background-color: #FFFFFF;
 	color: #222222;
 	cursor: default;
-	/* font-size: 11px; */
+	/* font-size: 11px */
 	font-size: 14px;
 	padding: 2px 2px 20px 2px;
 	vertical-align: top;
 	max-width:865px;
-	word-wrap: break-word
+	word-wrap: break-word;
 }
 
 .TableRowBottomDashed {
@@ -545,9 +541,6 @@ UL {
 	margin: 0px 0px 10px 35px;
 }
 
-
-
-
 /*  SECTIONS  */
 .section {
 	clear: both;
@@ -564,10 +557,6 @@ UL {
 	margin: 0% 0 0% 0%;
 }
 .col:first-child { margin-left: 0; }
-
-
-
-
 
 /*  GROUPING  */
 .group:before,
@@ -710,7 +699,8 @@ div{
 }
 
 .header_image{
-	
+	padding-top: 10px;
+	padding-right: 15px;
 }
 
 .body_object{
@@ -728,8 +718,6 @@ div{
 .previewPanel {
 	display:none;
 	position:absolute;
-	/* margin-top:200px;
-	margin-left:-200px; */
 	overflow: auto;   
 	width:400px;
 	max-height:200px;
@@ -738,24 +726,7 @@ div{
 	padding: 5px 5px 5px 5px;
 	background-color: white;
 }
-/*
-div.previewPanel .TableRow
-{
-       padding-bottom: 2px !important;
-       background-color: inherit !important;
-}*/
-/*
-div.previewPanel .TableHeading
-{
-       background-color: inherit !important;
-       padding-top:8px;
-       padding-top:3px;
-}*/
-/*
-div.previewPanel .TableRowBottomDashed {
-       display:none;
-}*/
+
 /* EIND: TOOLTIP CODE */
 
 #EMBEDDED_IMAGES#
-
