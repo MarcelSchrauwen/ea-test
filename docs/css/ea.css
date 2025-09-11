@@ -726,16 +726,17 @@ div{
 
 /* START: TOOLTIP CODE */
 .previewPanel {
-       display:none;
-       position:absolute;
-       /* margin-top:200px;
-       margin-left:-200px; */
-       width:400px;
-       max-height:200px;
-       border: 1px solid grey;
-       border-radius: 0px;
-       padding: 5px 5px 5px 5px;
-       background-color: white;
+	display:none;
+	position:absolute;
+	/* margin-top:200px;
+	margin-left:-200px; */
+	overflow: hidden;   
+	width:400px;
+	max-height:200px;
+	border: 1px solid grey;
+	border-radius: 0px;
+	padding: 5px 5px 5px 5px;
+	background-color: white;
 }
 /*
 div.previewPanel .TableRow
