@@ -83,8 +83,6 @@ function bulkshow(showpage) {
 // START - TOOLTIP CODE
 function mapRectangleMouseOver(sender) {
 
-    $(".previewPanel").css("display", "none");
-
     if (!sender || !sender.href) return;
 
     var informationURL = sender.href;
@@ -112,14 +110,14 @@ function mapRectangleMouseOver(sender) {
         
         $(".previewPanel").css("margin-top", (Number(array[1]) - 100) + "px");
         $(".previewPanel").css("margin-left", (Number(array[2]) - 400) + "px");
-        $(".previewPanel").fadeIn(200); // <-- fade in
+        $(".previewPanel").fadeIn(200); // fade in zonder vooraf display:none
     });
 
 }
 
 function mapRectangleMouseOut(sender) {
     if ($(".previewPanel:hover").length === 0) {
-        $(".previewPanel").fadeOut(200); // <-- fade out
+        $(".previewPanel").fadeOut(200); // fade out
     }
 }
 
